@@ -15,6 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'spec/fixtures/*.html',
       'lib/*.js',
       'spec/*.js'
     ],
@@ -29,11 +30,12 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
         'lib/*.js': ['browserify'],
+        'spec/fixtures/*.html': ['html2js'],
         'spec/*.js': ['browserify']
     },
 
     browserify: {
-        transform: ['babelify']
+        transform: ['browserify-shim', 'babelify']
     },
 
 

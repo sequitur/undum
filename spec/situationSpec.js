@@ -1,3 +1,5 @@
+'use strict';
+
 var Situation = require('../lib/situation.js');
 
 describe('Situation', function() {
