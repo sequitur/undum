@@ -2,3 +2,4 @@ node_modules
 *.pyc
 docs/out/doc
 ve
+undum.sublime-workspace
