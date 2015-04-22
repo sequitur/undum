@@ -37,7 +37,7 @@ describe('view', function () {
         output: '<p>foo</p>'
       });
 
-      expect($('#content')).toContainHtml('<p>foo</p>');
+      expect($('#content')).toContainHtml('<p class="new">foo</p>');
     });
 
     it('adds write events to the bottom', function () {
@@ -50,21 +50,20 @@ describe('view', function () {
         output: '<p>bar</p>'
       });
 
-      expect($('#content')).toContainHtml('<p>foo</p><p>bar</p>');
+      expect($('#content')).toContainHtml('<p class="">foo</p><p class="new">bar</p>');
     });
 
     it('appends when a selector is passed to write', function () {
-      setFixtures(window.__html__['spec/fixtures/filledContentFixture.html']);
       view.receive({
         method: 'write',
         output: '<p>bar</p>',
         selector: '.test'
       });
 
-      expect($('#content')).toContainHtml('<p class="test">foo</p><p>bar</p>');
+      expect($('#content')).toContainHtml('<p class="test">foo</p><p class="new">bar</p>');
     });
 
-    it('writes at the top of #content when there is no selector', function () {
+    it('writes at the top of #content when no selector is given to writeBefore', function () {
       view.receive({
         method: 'writeBefore',
         output: '<p>foo</p>'
@@ -74,18 +73,82 @@ describe('view', function () {
         output: '<p>bar</p>',
       });
 
-      expect($('#content')).toContainHtml('<p>bar</p><p>foo</p>');
+      expect($('#content')).toContainHtml('<p class="new">bar</p><p class="">foo</p>');
     });
 
     it('writes before a selector with writeBefore', function () {
-      setFixtures(window.__html__['spec/fixtures/filledContentFixture.html']);
       view.receive({
         method: 'writeBefore',
         output: '<p>bar</p>',
         selector: '.test'
       });
 
-      expect($('#content')).toContainHtml('<p>bar</p><p class="test">foo</p>');
+      expect($('#content')).toContainHtml('<p class="new">bar</p><p class="test">foo</p>');
+    });
+
+    it('inserts with writeInto', function () {
+      view.receive({
+        method: 'writeInto',
+        output: '<span>bar</span>',
+        selector: '.test'
+      });
+
+      expect($('#content')).toContainHtml('<p class="test">foo<span class="new">bar</span></p>');
+    });
+
+    it('replaces with replaceWith', function () {
+      view.receive({
+        method: 'replaceWith',
+        output: '<p>bar</p>',
+        selector: '.test'
+      });
+
+      expect($('#content')).not.toContainHtml('<p class="test">foo</p>');
+      expect($('#content')).toContainHtml('<p class="new">bar</p>');
+    });
+
+    it('adds the .new class to newly-created DOM elements', function () {
+      view.receive({
+        method: 'write',
+        output: '<p>bar</p><p>baz</p>',
+      });
+
+      expect($('#content')).toContainHtml('<p class="new">bar</p><p class="new">baz</p>');
+    });
+
+    it('accepts a list of output events', function () {
+      view.receive([
+        {
+          method: 'write',
+          output: '<p>bar</p>'
+        },
+        {
+          method: 'write',
+          output: '<p>baz</p>'
+        }]);
+
+      expect($('#content')).toContainHtml('<p class="new">bar</p><p class="new">baz</p>');
+    });
+
+  });
+
+  describe('clearNew', function () {
+
+    it('removes the .new class from elements', function () {
+      view.receive({
+        method: 'write',
+        output: '<p>bar</p>'
+      });
+
+      expect($('#content')).toContainHtml('<p class="new">bar</p>');
+
+      view.receive({
+        method: 'write',
+        output: '<p>baz</p>'
+      });
+
+      expect($('#content'))
+        .toContainHtml('<p class="">bar</p><p class="new">baz</p>');
     });
 
   });
