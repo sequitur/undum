@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- Game Title: edit this -->
+    <title>Undum</title>
+    <!-- End of Game Title -->
+
+    <link media="screen"
+          rel="stylesheet" href="../css/undum.css">
+    <link rel="stylesheet" href="highlight.css">
+
+    <!-- Suppport for mobile devices. -->
+    <meta name="viewport" content="user-scalable=no, width=device-width">
+    <script type="text/javascript" src="bundle.js"></script>
+
+  </head>
+  <body>
+    <!-- This isn't needed and isn't visible in desktop versions,
+         because we can display the character information and the
+         tools onscreen all the time. -->
+    <div id="toolbar">
+      <!-- Set this to be a small version of the title, for the
+           toolbar on mobile devices. -->
+      <h1>Undum</h1>
+      <div class="nav">
+        <a href="#" class="button" id="menu-button">Menu</a>
+      </div>
+    </div>
+    <ul id="menu">
+      <li><a href="#title, #content_wrapper">Story</a></li>
+      <li><a href="#character_panel">Character</a></li>
+      <li><a href="#info_panel">Info</a></li>
+    </ul>
+
+    <div id="page">
+
+      <div id="tools_wrapper">
+        <div id="info_panel" class="tools left">
+
+          <!-- Game Background: edit this -->
+          <h1>Undum</h1>
+          <p>
+            Undum is a pure client-side game framework for narrative
+            interactive fiction. It is designed for HTML&#x200A;5 and
+            CSS&#x200A;3. You can read more and download the source
+            code <a href="http://github.com/idmillington/undum">here</a>.
+          </p>
+          <!-- End of Game Background -->
+
+          <div class='buttons'>
+            <button id="save">Save</button><button id="erase">Erase</button>
+          </div>
+        </div>
+
+        <div id="character_panel" class="tools right">
+          <h1>Character</h1>
+          <div id="character">
+            <div id="character_text">
+              <div id="character_text_content"></div>
+            </div>
+            <div id="qualities"></div>
+          </div>
+        </div>
+      </div> <!-- End of div.tools_wrapper -->
+
+      <div id="mid_panel">
+        <div id="title">
+          <div class="label">
+
+            <!-- Game Title: edit this -->
+            <h1>Undum</h1>
+            <!-- End of Game Title -->
+
+            <noscript><p class="noscript_message">This game requires 
+              Javascript.</p></noscript>
+            <p class="click_message">click to begin</p>
+          </div>
+        </div>
+
+        <div id="content_wrapper">
+          <div id="content">
+          </div>
+          <a name="end_of_content"></a>
+        </div>
+
+        <div id="legal">
+          <!-- Your Copyright: edit this -->
+          <p>Content and additional software and design &copy; 2010 IDM.</p>
+          <!-- End of Your Copyright -->
+
+          <!-- This line is totally optional. -->
+          <p>Created with <a href="http://undum.com">Undum</a>.</p>
+        </div>
+      </div>
+    </div> <!-- End of div.page -->
+
+    <!-- Holds UI elements that will be cloned and placed in the main
+         page. This block itself is always hidden. -->
+    <div id="ui_library">
+      <div id="quality" class="quality">
+        <span class="name" data-attr="name"></span>
+        <span class="value" data-attr="value"></span>
+      </div>
+
+      <div id="quality_group" class="quality_group">
+        <h2 data-attr="title"></h2>
+        <div class="qualities_in_group">
+        </div>
+      </div>
+
+      <div id="progress_bar" class="progress_bar">
+        <span class="name" data-attr="name"></span>
+        <span class="value" data-attr="value"></span>
+        <div class="progress_bar_track">
+          <div class="progress_bar_color" data-attr="width">
+          </div>
+        </div>
+        <span class="left_label" data-attr="left_label"></span>
+        <span class="right_label" data-attr="right_label"></span>
+      </div>
+
+      <hr id="turn_separator">
+    </div>
+
+  </body>
+</html>
