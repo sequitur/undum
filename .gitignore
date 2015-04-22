@@ -1,5 +1,4 @@
 node_modules
-*.pyc
 docs/out/doc
-ve
+test/**/bundle.js
 undum.sublime-workspace
